@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+# Next.js
+.next/
+out/
+build/
+# Environments and secrets
+.env*
+!.env.example
+# Logs and caches
+*.log
+*.tsbuildinfo
+# System files
+.DS_Store
+Thumbs.db
+# Tool-local outputs
+.codex-log/
+# Agent document
+AGENTS.md
+.agents/
+docs/PROMPTS_CODEX.md
