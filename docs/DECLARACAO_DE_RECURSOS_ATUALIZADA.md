@@ -47,10 +47,10 @@
 
 | Dado | Origem | Situação |
 |---|---|---|
-| Materiais (papelão, PET, alumínio) | Categorias de exemplo definidas pela equipe | Ilustrativos até eventual validação com operadores |
-| Geradores fictícios A, B e C: 8, 12 e 10 kg de papelão | **Dados sintéticos** | Não refletem registros, transações ou pesagens reais |
-| Coletor Exemplo 1: mínimo hipotético de 25 kg | **Dado sintético** | Não representa política, preço ou restrição de um operador real |
-| Região Teste 1 | Região fictícia/abstraída | Não utiliza endereço pessoal ou geolocalização precisa |
+| Materiais (papelão, plástico PET, vidro e alumínio) | Categorias de exemplo do protótipo | Ilustrativos até eventual validação com operadores |
+| Gerador da demonstração: 8 kg; dois volumes fictícios: 12 kg e 10 kg de papelão | **Dados sintéticos** | Soma 30 kg apenas no cenário demonstrativo de Osasco · Centro; não reflete pesagens reais |
+| Coletores demonstrativos por região e mínimos por material | **Dados sintéticos** | Não representam parceiros ou políticas de operadores reais; exemplo de papelão usa mínimo hipotético de 25 kg |
+| Regiões: Osasco · Centro, Presidente Altino, Quitaúna, Vila Yara, Rochdale e Jardim D'Abril; Carapicuíba · Centro; Barueri · Centro | Rótulos de seleção; volumes e cobertura de coletores são fixtures | Sem endereço pessoal, distâncias reais, geolocalização ou agrupamento entre regiões diferentes |
 | Valores financeiros, se exibidos | Premissas simuladas explicitamente rotuladas | Não equivalem a cotações reais, pagamento prometido ou ganho comprovado |
 
 **Regra de privacidade:** utilizar apenas dados públicos, sintéticos ou anonimizados. Não coletar/expor dados pessoais ou sigilosos de terceiros na demonstração.

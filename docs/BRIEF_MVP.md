@@ -1,7 +1,7 @@
 # BRIEF_MVP.md — Descarte inteligente e oportunidades de coleta
 
 **Projeto:** Hackathon EPPEN — Transformação Digital e Sustentabilidade  
-**Região de referência:** Osasco e entorno  
+**Região de referência:** Osasco, Carapicuíba e Barueri  
 **Data:** 31/10/2026  
 **Status:** **escopo proposto com base nas discussões e no Lean Canvas; confirmar com a equipe antes da implementação.**  
 **Responsável pela aprovação:** equipe do hackathon (a definir)
@@ -34,7 +34,7 @@ Pequenos geradores de recicláveis — inicialmente **condomínios e pequenos co
 
 **Jornada demonstrativa em até três etapas/telas:**
 
-1. **Entrada e cadastro:** a pessoa escaneia um QR Code de cartaz/folder e abre `https://DOMINIO_REAL/descarte?origem=cartaz`. Seleciona **material**, **quantidade (kg)** e **região/bairro**. Seleção manual obrigatória; foto/IA não são requisito da primeira versão.
+1. **Entrada e cadastro:** a pessoa escaneia um QR Code de cartaz/folder e abre `https://DOMINIO_REAL/descarte?origem=folder`. Seleciona **material**, **quantidade (kg)** e **região/bairro**. Seleção manual obrigatória; foto/IA não são requisito da primeira versão.
 2. **Matching e agrupamento:** o sistema confere aceitação do material, região atendida e volume mínimo dos coletores sintéticos. Se o volume individual for insuficiente, reúne **registros sintéticos compatíveis** da mesma região e material. Exibe total agrupado e motivo da elegibilidade ou inelegibilidade.
 3. **Resultado:** apresenta uma **oportunidade simulada de coleta**, com operador fictício, condições de recebimento e explicação da recomendação. Pode exibir uma **confirmação demonstrativa** de entrega, se houver tempo; não há coleta nem pagamento reais.
 
@@ -43,7 +43,7 @@ Pequenos geradores de recicláveis — inicialmente **condomínios e pequenos co
 ## 4. Escopo mínimo obrigatório (MVP)
 
 - Interface mobile-first, em português, funcional por navegador sem instalar aplicativo e sem login.
-- Rota pública `/descarte` com parâmetro opcional `origem=cartaz` para o QR Code.
+- Rota pública `/descarte` com parâmetro opcional `origem=folder` para o QR Code.
 - Formulário com categoria de reciclável seco (por exemplo: papelão, PET, alumínio), quantidade positiva em kg e região selecionada.
 - Dados sintéticos locais de geradores e coletores, claramente rotulados como **fictícios**.
 - Regras determinísticas para: compatibilidade de material, região/área atendida, limite mínimo por operador e agrupamento de volumes do mesmo material na mesma região.
@@ -71,10 +71,10 @@ Usar valores de exemplo e identificar sua origem fictícia na interface.
 
 | Registro | Material | Volume | Região | Finalidade |
 |---|---|---:|---|---|
-| Gerador A (usuário da demonstração) | Papelão | 8 kg | Região Teste 1 | Volume individual |
-| Gerador B | Papelão | 12 kg | Região Teste 1 | Agrupamento |
-| Gerador C | Papelão | 10 kg | Região Teste 1 | Agrupamento |
-| Coletor Exemplo 1 | Aceita papelão | Mínimo 25 kg | Atende Região Teste 1 | Verificação de elegibilidade |
+| Gerador A (usuário da demonstração) | Papelão | 8 kg | Osasco · Centro | Volume individual |
+| Gerador B (fictício) | Papelão | 12 kg | Osasco · Centro | Agrupamento |
+| Gerador C (fictício) | Papelão | 10 kg | Osasco · Centro | Agrupamento |
+| Coletor demonstrativo A (fictício) | Aceita papelão | Mínimo 25 kg | Atende Osasco · Centro | Verificação de elegibilidade |
 
 **Resultado esperado:** 8 + 12 + 10 = **30 kg**, acima do mínimo **hipotético** de 25 kg. O resultado é **"oportunidade de coleta identificada"**, NÃO "coleta agendada" ou "rentabilidade comprovada".
 
@@ -96,7 +96,7 @@ Criar também um cenário negativo: material não aceito, região não atendida 
 - **Frontend:** Next.js (App Router), React, TypeScript e Tailwind CSS, aproveitando o starter genérico existente.
 - **Lógica:** funções TypeScript locais e puras para filtros, somas, critérios de elegibilidade e explicação do matching.
 - **Dados:** fixtures JSON/TS locais, sem persistência real no primeiro MVP.
-- **Acesso:** QR Code gerado **somente após** definir/testar a URL pública; parâmetro `origem=cartaz` identifica a intenção de campanha, sem alegar rastreamento real.
+- **Acesso:** QR Code gerado **somente após** definir/testar a URL pública; parâmetro `origem=folder` identifica a entrada pelo folder, sem alegar rastreamento real.
 - **Hospedagem:** Coolify autogerenciado como opção de deploy, com aplicação exposta via domínio **HTTPS público**. Utilizar build/configuração compatíveis com o projeto existente; testar acesso pelo celular fora da rede Wi-Fi do servidor.
 - **Plano de contingência:** `npm run dev` local e breve captura/gravação da demonstração caso a hospedagem ou a internet falhe.
 

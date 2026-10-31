@@ -4,7 +4,7 @@
 
 O fluxo principal é uma experiência em três etapas na rota `/descarte`: escolher material, quantidade e região; ver coletores compatíveis e volumes agrupados na mesma região; confirmar uma entrega simulada.
 
-Os materiais, coletores, regiões, horários, distâncias e volumes são dados sintéticos. O matching é local: filtra coletores pela região e pelo material aceito. O volume total mostrado soma a quantidade digitada a um volume fixture da combinação selecionada. Nenhum agendamento ou coleta é criado. O indicador exibido é apenas volume operacional potencialmente agrupado; o impacto socioambiental não foi validado pela equipe e não é calculado.
+Materiais, cobertura de coletores, mínimos e volumes são dados sintéticos. A interface não inventa parceiros, distâncias ou horários reais. O matching é local: filtra coletores pela região e pelo material aceito. O volume total mostrado soma a quantidade digitada aos registros fictícios da combinação selecionada. Nenhum agendamento ou coleta é criado. O indicador exibido é apenas volume operacional potencialmente agrupado; o impacto socioambiental não foi validado pela equipe e não é calculado.
 
 ## Execução local
 
@@ -25,11 +25,14 @@ npm run start
 
 ## Roteiro manual
 
-1. Acesse `/descarte?origem=folder` em um celular ou viewport estreito. Confirme a identificação de acesso pelo QR e que não há rolagem horizontal.
-2. Selecione cada material, altere quantidade e região. Envie uma quantidade válida e confirme que os coletores e o agrupamento exibidos correspondem ao material e região escolhidos.
-3. Informe zero ou deixe a quantidade inválida e envie o formulário. Confirme a mensagem de validação e que a etapa não avança.
-4. Selecione um coletor, avance por **Confirmar entrega simulada** e confira o resumo, o protocolo `REC-0428` e os avisos de simulação.
-5. Use **Fazer outra simulação** para voltar ao estado inicial.
+1. Abra `/` e confirme o hero, a explicação do problema, as etapas **informar / agrupar / conectar**, o diferencial regional, o aviso de simulação e o CTA `Simular descarte`.
+2. Use `/descarte?origem=landing` pelo CTA e `/descarte?origem=folder` pelo QR. Confirme que a origem muda e que o fluxo em três etapas funciona em um celular/viewport estreito, sem rolagem horizontal.
+3. Escolha Papelão, `8 kg`, `Osasco · Centro`. O cenário sintético deve somar `8 + 12 + 10 = 30 kg`, mostrar mínimo fictício de `25 kg` e oferecer confirmação simulada.
+4. No mesmo cenário, altere a quantidade para `1 kg`. O total deve ser `23 kg`, informar insuficiência e ocultar a confirmação.
+5. Selecione Alumínio e `Barueri · Centro`. Deve informar que não há coletor compatível; não deve buscar coletor em outro município.
+6. Confirme também que Osasco · Centro, Carapicuíba · Centro e Barueri · Centro são três opções distintas, sem mistura automática de volumes.
+7. Informe zero e envie o formulário. Confirme a mensagem de validação e que a etapa não avança.
+8. Conclua o cenário elegível e confira o protocolo `REC-0428`, o resumo e o aviso de que não há coleta ou pagamento real.
 
 ## Resultados das verificações executadas
 
@@ -37,10 +40,15 @@ Verificações executadas neste ambiente:
 
 - `npm run check` — aprovado (ESLint e TypeScript).
 - `npm run build` — aprovado com Next.js 16.4.3 e Webpack; a saída inclui `/descarte` renderizada no servidor.
-- Smoke test HTTP em `localhost:3000` — não concluído: o sandbox recusou a conexão local e a nova tentativa não recebeu resposta.
-- Roteiro manual em celular/navegador — pendente.
+- Navegador a 375 px CSS — landing e fluxo sem overflow horizontal; CTA levou a `/descarte?origem=landing` e o QR foi conferido em `/descarte?origem=folder`.
+- Fluxo móvel — aprovados os resultados de 30 kg (8 + 12 + 10, mínimo 25), insuficiente (1 + 12 + 10 = 23), ausência de coletor (Alumínio em Barueri · Centro) e confirmação simulada `REC-0428`.
+- Deploy em Coolify e acesso por aparelho físico/4G — pendentes; não há instância/domínio de deploy configurados nesta execução.
 
 O build padrão do Next.js 16 tentou usar Turbopack, mas o processo auxiliar do PostCSS encerrou antes da conexão neste ambiente Windows. `next build --webpack` compilou, passou o TypeScript e gerou as rotas; por isso o script `build` usa Webpack explicitamente. O deploy ainda precisa ser validado no servidor Coolify de destino.
+
+## Matching e fixtures
+
+As regiões configuradas são Osasco · Centro, Presidente Altino, Quitaúna, Vila Yara, Rochdale e Jardim D'Abril; Carapicuíba · Centro; e Barueri · Centro. Cada opção tem um ID distinto. Os fixtures são indexados por material e ID exato da região. O exemplo positivo usa Papelão em Osasco · Centro (8 kg informados + 12 kg + 10 kg sintéticos) e um mínimo demonstrativo de 25 kg. Os cenários negativos reproduzíveis são 1 kg de Papelão em Osasco · Centro (23 kg totais) e Alumínio em Barueri · Centro (sem coletor fixture).
 
 ## Coolify com Nixpacks
 

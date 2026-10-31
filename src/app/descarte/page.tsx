@@ -14,5 +14,5 @@ export default async function DescartePage({ searchParams }: DescartePageProps) 
   const params = await searchParams;
   const origin = Array.isArray(params.origem) ? params.origem[0] : params.origem;
 
-  return <DescarteFlow origin={origin === "folder" ? "folder" : undefined} />;
+  return <DescarteFlow origin={origin === "folder" || origin === "landing" ? origin : undefined} />;
 }

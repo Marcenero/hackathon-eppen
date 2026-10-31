@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hackathon EPPEN | Kit de prototipagem",
-  description: "Um ponto de partida reutilizável para a equipe transformar uma descoberta em protótipo.",
+  title: "EPPEN Circular | Descarte inteligente",
+  description: "Conectamos descartadores de recicláveis a coletores compatíveis e identificamos oportunidades de agrupamento regional.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

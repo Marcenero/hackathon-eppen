@@ -29,4 +29,4 @@ O projeto inclui `nixpacks.toml` e `.node-version` para build e start via Nixpac
 
 ## Limites da demonstração
 
-Coletores, regiões, distâncias, horários e volumes são fixtures sintéticas. O matching usa compatibilidade e região em regras locais; não há geolocalização, persistência, autenticação, serviços externos nem coleta real. O volume potencial agrupado é apenas um indicador operacional de demonstração, não uma métrica de impacto ambiental validada.
+Cobertura de coletores, mínimos e volumes são fixtures sintéticas; não há nomes de parceiros ou distâncias inventadas. O matching usa compatibilidade e região em regras locais; não há geolocalização, persistência, autenticação, serviços externos nem coleta real. O volume potencial agrupado é apenas um indicador operacional de demonstração, não uma métrica de impacto ambiental validada.
